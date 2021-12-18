@@ -7,7 +7,7 @@ export async function saveSubscription(
   customerId: string,
   createAction: boolean,
 ) {
-  const userRef = fauna.query(
+  const userRef = await fauna.query(
     query.Select(
       'ref',
       query.Get(
@@ -19,6 +19,8 @@ export async function saveSubscription(
     ),
   );
 
+  console.log('user REF: userRef')
+
   const subscription = await stripe.subscriptions.retrieve(subscriptionId);
 
   const subscriptionData = {
@@ -28,7 +30,12 @@ export async function saveSubscription(
     priceId: subscription.items.data[0].price.id,
   };
 
+  console.log('subscriptionData:', subscriptionData);
+
+  console.log('createAction:', createAction);
+
   if (createAction) {
+    console.log('entrou no create');
     await fauna.query(
       query.Create(
         query.Collection('subscriptions'),
@@ -36,6 +43,7 @@ export async function saveSubscription(
       ),
     );
   } else {
+    console.log('não entrou no create');
     await fauna.query(
       query.Replace(
         query.Select(
@@ -51,4 +59,6 @@ export async function saveSubscription(
       ),
     );
   };
+
+  console.log('cabo subscription');
 }; 
