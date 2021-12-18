@@ -18,7 +18,7 @@ Projeto do módulo 03 do bootcamp Ignite - React da Rocketseat.
 - Webhook
 - Conexão com CMS (Prismic)
 
-# Commo rodar a aplicação
+# Como rodar a aplicação
 
 1. Faça um clone do repositório na sua máquina.
 2. Crie um arquivo `.env.local` na pasta raiz do projeto, seguindo o padrão do arquivo `.env`, presente no projeto.
